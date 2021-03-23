@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.novotnyr.yello.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,5 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.noteRecyclerView.layoutManager = GridLayoutManager(this, 3)
     }
 
-    fun onFloatingActionButtonClick(view: View) {}
+    fun onFloatingActionButtonClick(view: View) {
+        Snackbar.make(view, "Klik!", Snackbar.LENGTH_SHORT).show();
+    }
 }
