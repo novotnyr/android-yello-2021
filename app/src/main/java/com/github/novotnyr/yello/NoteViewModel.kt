@@ -10,4 +10,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val noteDao: NoteDao = db.noteDao()
 
     val notes: LiveData<List<Note>> = noteDao.list()
+
+    fun add(note: Note) {
+        db.transactionExecutor.execute {
+            noteDao.save(note)
+        }
+    }
 }
