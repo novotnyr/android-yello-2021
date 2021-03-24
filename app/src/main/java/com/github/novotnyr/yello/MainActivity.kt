@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
             .apply { setContentView(root) }
 
         binding.noteRecyclerView.layoutManager = GridLayoutManager(this, 3)
+        val noteListAdapter = NoteListAdapter()
+        binding.noteRecyclerView.adapter = noteListAdapter
     }
 
     fun onFloatingActionButtonClick(view: View) {
