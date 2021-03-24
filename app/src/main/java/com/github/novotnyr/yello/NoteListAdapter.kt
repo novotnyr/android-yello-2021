@@ -1,8 +1,11 @@
 package com.github.novotnyr.yello
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
@@ -22,5 +25,18 @@ class NoteViewHolder(root: View) : RecyclerView.ViewHolder(root) {
 
     fun bind(note: Note) {
         text1.text = "${note.description} (${Date(note.timestamp)})"
+    }
+}
+
+class NoteListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiff) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+
+        val inflater = LayoutInflater.from(parent.context)
+        val root = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+        return NoteViewHolder(root)
+    }
+
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 }
