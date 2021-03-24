@@ -28,6 +28,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onFloatingActionButtonClick(view: View) {
-        Snackbar.make(view, "Klik!", Snackbar.LENGTH_SHORT).show();
+        noteViewModel.add(Note(description = "Note"))
     }
 }
