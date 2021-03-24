@@ -1,14 +1,12 @@
 package com.github.novotnyr.yello
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.novotnyr.yello.databinding.NoteBinding
-import java.util.*
 
 object NoteDiff : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
@@ -23,7 +21,8 @@ object NoteDiff : DiffUtil.ItemCallback<Note>() {
 
 class NoteViewHolder(val binding: NoteBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(note: Note) {
-        binding.noteDescriptionTextView.text = "${note.description} (${Date(note.timestamp)})"
+        val period = DateUtils.getRelativeTimeSpanString(note.timestamp)
+        binding.noteDescriptionTextView.text = "${note.description}\n($period)"
     }
 }
 
