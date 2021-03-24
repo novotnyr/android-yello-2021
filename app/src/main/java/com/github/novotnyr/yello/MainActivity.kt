@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         binding.noteRecyclerView.layoutManager = GridLayoutManager(this, 3)
         val noteListAdapter = NoteListAdapter()
         binding.noteRecyclerView.adapter = noteListAdapter
+
+        noteViewModel.notes.observe(this, noteListAdapter::submitList)
     }
 
     fun onFloatingActionButtonClick(view: View) {
