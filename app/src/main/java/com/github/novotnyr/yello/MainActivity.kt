@@ -1,12 +1,15 @@
 package com.github.novotnyr.yello
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.novotnyr.yello.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +31,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onFloatingActionButtonClick(view: View) {
-        noteViewModel.add(Note(description = "Note"))
+        val descriptionEditText = EditText(this)
+
+        AlertDialog.Builder(this)
+            .setView(descriptionEditText)
+            .setPositiveButton("Save") { _, _ ->
+                val description = descriptionEditText.text.toString()
+                noteViewModel.add(Note(description = description))
+            }
+            .show()
     }
 }
