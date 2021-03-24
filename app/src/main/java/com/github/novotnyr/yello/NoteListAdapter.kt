@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.github.novotnyr.yello.databinding.NoteBinding
 import java.util.*
 
 object NoteDiff : DiffUtil.ItemCallback<Note>() {
@@ -20,20 +21,17 @@ object NoteDiff : DiffUtil.ItemCallback<Note>() {
     }
 }
 
-class NoteViewHolder(root: View) : RecyclerView.ViewHolder(root) {
-    val text1: TextView = root.findViewById(android.R.id.text1)
-
+class NoteViewHolder(val binding: NoteBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(note: Note) {
-        text1.text = "${note.description} (${Date(note.timestamp)})"
+        binding.noteDescriptionTextView.text = "${note.description} (${Date(note.timestamp)})"
     }
 }
 
 class NoteListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-
         val inflater = LayoutInflater.from(parent.context)
-        val root = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-        return NoteViewHolder(root)
+        val binding = NoteBinding.inflate(inflater, parent, false)
+        return NoteViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
